@@ -1,13 +1,14 @@
 [Unit]
-Description=Small description of the service
+Description=Apache NiFi is a dataflow system based on the principles of Flow-Based Programming
 After=network.target
 
 [Service]
-Type=simple
+Type=forking
 User=__APP__
 Group=__APP__
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/script
+ExecStart=__INSTALL_DIR__/bin/nifi.sh start
+ExecStop=__INSTALL_DIR__/bin/nifi.sh stop
 StandardOutput=append:/var/log/__APP__/__APP__.log
 StandardError=inherit
 
