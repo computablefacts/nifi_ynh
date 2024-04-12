@@ -1,5 +1,5 @@
 [Unit]
-Description=Apache NiFi is a dataflow system based on the principles of Flow-Based Programming
+Description=Apache NiFi
 After=network.target
 
 [Service]

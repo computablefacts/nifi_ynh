@@ -49,7 +49,7 @@ ram.runtime = "50M"
     [install.path]
     # this is a generic question - ask strings are automatically handled by YunoHost's core
     type = "path"
-    default = "/example"
+    default = "/my-nifi"
 
     [install.init_main_permission]
     # this is a generic question - ask strings are automatically handled by YunoHost's core
@@ -57,23 +57,9 @@ ram.runtime = "50M"
     type = "group"
     default = "visitors"
 
-    [install.language]
-    ask.en = "Choose the application language"
-    ask.fr = "Choisissez la langue de l'application"
-    type = "select"
-    choices = ["fr", "en"]
-    default = "fr"
-
     [install.admin]
     # this is a generic question - ask strings are automatically handled by YunoHost's core
     type = "user"
-
-    [install.password]
-    # this is a generic question - ask strings are automatically handled by YunoHost's core
-    # Note that user-provided passwords questions are not automatically saved as setting
-    help.en = "Use the help field to add an information for the admin about this question."
-    help.fr = "Utilisez le champ aide pour ajouter une information à l'intention de l'administrateur à propos de cette question."
-    type = "password"
 
 [resources]
     # See the packaging documentation for the full set
@@ -85,15 +71,12 @@ ram.runtime = "50M"
     # This will pre-fetch the asset which can then be deployed during the install/upgrade scripts with :
     #    ynh_setup_source --dest_dir="$install_dir"
     # You can also define other assets than "main" and add --source_id="foobar" in the previous command
-    url = "https://github.com/foo/bar/archive/refs/tags/v1.2.3.tar.gz"
-    sha256 = "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef"
+    url = "https://dlcdn.apache.org/nifi/1.25.0/nifi-1.25.0-bin.zip"
+    sha256 = "ce314ddbc1471fc8c2b670abe4091d853a2f12ba2cc13354c166b15f9d965684"
 
-    # These infos are used by https://github.com/YunoHost/apps/blob/master/tools/autoupdate_app_sources/autoupdate_app_sources.py
-    # to auto-update the previous asset urls and sha256sum + manifest version
-    # assuming the upstream's code repo is on github and relies on tags or releases
-    # See the 'sources' resource documentation for more details
-
-    # autoupdate.strategy = "latest_github_tag"
+    [resources.sources.toolkit]
+    url = "https://dlcdn.apache.org/nifi/1.25.0/nifi-toolkit-1.25.0-bin.zip"
+    sha256 = "a9c519be4490ad6a442fff4f083e1e7a63f4b78895aff66a8b51316ae4c11d6d"
 
     [resources.system_user]
     # This will provision/deprovision a unix system user
@@ -114,11 +97,7 @@ ram.runtime = "50M"
     [resources.ports]
     # This will pick a random port for reverse-proxying and store it as the $port setting
 
-    [resources.apt]
+    #[resources.apt]
     # This will automatically install/uninstall the following apt packages
     # and implicitly define the $phpversion setting as 8.0 (if phpX.Y-foobar dependencies are listed)
-    packages = "mariadb-server, deb1, deb2, php8.0-foo, php8.0-bar"
-
-    [resources.database]
-    # This will automatically provision/deprovison a MySQL DB and store the corresponding credentials in settings $db_user, $db_name, $db_pwd
-    type = "mysql"
+    #packages = "mariadb-server, deb1, deb2, php8.0-foo, php8.0-bar"
