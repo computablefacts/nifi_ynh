@@ -71,7 +71,28 @@ ynh_replace_string --match_string="^nifi.web.https.port=.*$" --replace_string="n
 ynh_replace_string --match_string="^nifi.web.proxy.host=.*$" --replace_string="nifi.web.proxy.host=$domain" --target_file="$install_dir/conf/nifi.properties"
 ynh_replace_string --match_string="^nifi.web.proxy.context.path=.*$" --replace_string="nifi.web.proxy.context.path=$path" --target_file="$install_dir/conf/nifi.properties"
 
-mkdir -p "$data_dir/flow/archive"
+# Create a admin SFTP directory
+mkdir -p "/home/$admin/nifi"
+# Create flow directory and link it to data_dir
+mkdir -p "/home/$admin/nifi/flow/archive"
+ln -s "/home/$admin/nifi/flow" "$data_dir/flow"
+chown "$app:$app" "/home/$admin/nifi/flow"
+# Create an empty .env file and link it to data_dir
+touch "/home/$admin/nifi/.env"
+ln -s "/home/$admin/nifi/.env" "$data_dir/.env"
+chown "$app:$app" "/home/$admin/nifi/.env"
+
+chmod -R o+rw "/home/$admin/nifi"
+
+# Create a shared SFTP directory
+mkdir -p /home/shared/nifi
+# Create nifi-addons directory and link it to data_dir
+mkdir -p /home/shared/nifi/nifi-addons
+ln -s /home/shared/nifi/nifi-addons "$data_dir/nifi-addons"
+# Set rights
+chown "$app:$app" /home/shared/nifi
+chmod -R 777 /home/shared/nifi
+
 ynh_replace_string --match_string="^nifi.flow.configuration.file=.*$" --replace_string="nifi.flow.configuration.file=$data_dir/flow/flow.xml.gz" --target_file="$install_dir/conf/nifi.properties"
 ynh_replace_string --match_string="^nifi.flow.configuration.json.file=.*$" --replace_string="nifi.flow.configuration.json.file=$data_dir/flow/flow.json.gz" --target_file="$install_dir/conf/nifi.properties"
 ynh_replace_string --match_string="^nifi.flow.configuration.archive.dir=.*$" --replace_string="nifi.flow.configuration.archive.dir=$data_dir/flow/archive" --target_file="$install_dir/conf/nifi.properties"
@@ -92,9 +113,7 @@ mkdir -p "$data_dir/state/local"
 ynh_replace_string --match_string="\./state/local" --replace_string="$data_dir/state/local" --target_file="$install_dir/conf/state-management.xml"
 
 
-
 # LDAP
-
 cp "$install_dir/conf/login-identity-providers.xml" "$install_dir/conf/login-identity-providers.xml.save"
 ynh_add_config --template="login-identity-providers.xml" --destination="$install_dir/conf/login-identity-providers.xml"
 cp "$install_dir/conf/authorizers.xml" "$install_dir/conf/authorizers.xml.save"
@@ -169,6 +188,9 @@ ynh_add_nginx_config
 ###   - Remove also the section "STOP AND REMOVE SERVICE" in the remove script
 ###   - As well as the section "RESTORE SYSTEMD" in the restore script
 ###   - And the section "SETUP SYSTEMD" in the upgrade script
+
+ynh_add_config --template="systemd-start.sh" --destination="$install_dir/systemd-start.sh"
+chmod +x "$install_dir/systemd-start.sh"
 
 # Create a dedicated systemd config
 ynh_add_systemd_config

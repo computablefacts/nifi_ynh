@@ -7,7 +7,8 @@ Type=forking
 User=__APP__
 Group=__APP__
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/bin/nifi.sh start
+EnvironmentFile=__DATA_DIR__/.env
+ExecStart=__INSTALL_DIR__/systemd-start.sh
 ExecStop=__INSTALL_DIR__/bin/nifi.sh stop
 StandardOutput=append:/var/log/__APP__/__APP__.log
 StandardError=inherit
@@ -32,7 +33,7 @@ ProtectKernelModules=yes
 ProtectKernelTunables=yes
 LockPersonality=yes
 SystemCallArchitectures=native
-SystemCallFilter=~@clock @debug @module @mount @obsolete @reboot @setuid @swap @cpu-emulation @privileged
+SystemCallFilter=~@clock @debug @module @mount @obsolete @reboot @setuid @swap @cpu-emulation
 
 # Denying access to capabilities that should not be relevant for webapps
 # Doc: https://man7.org/linux/man-pages/man7/capabilities.7.html
