@@ -35,6 +35,10 @@ source /usr/share/yunohost/helpers
 #foo="bar"
 #ynh_app_setting_set --app=$app --key=foo --value=$foo
 
+redis_db=$(ynh_redis_get_free_db)
+ynh_app_setting_set --app=$app --key=redis_db --value=$redis_db
+redis-cli -n $redis_db SET app $app
+
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
