@@ -97,7 +97,18 @@ ram.runtime = "50M"
     [resources.ports]
     # This will pick a random port for reverse-proxying and store it as the $port setting
 
-    #[resources.apt]
+    [resources.apt]
     # This will automatically install/uninstall the following apt packages
     # and implicitly define the $phpversion setting as 8.0 (if phpX.Y-foobar dependencies are listed)
-    #packages = "mariadb-server, deb1, deb2, php8.0-foo, php8.0-bar"
+    packages = [
+      "a2ps", "bsdmainutils", "clickhouse-client", "curl", "g++", "ghostscript",
+      "liblz4-tool", "make", "nano", "pst-utils", "procmail",
+      "python3-bs4", "python3-dateutil", "python3-pip",
+      "rsync", "ssh", "sshpass",
+      "tesseract-ocr", 
+      "tesseract-ocr-deu", "tesseract-ocr-eng", "tesseract-ocr-fra",
+      "tesseract-ocr-ita", "tesseract-ocr-nld", "tesseract-ocr-osd", 
+      "tesseract-ocr-por", "tesseract-ocr-spa", "tesseract-ocr-vie",
+      "texlive-latex-base", "texlive-fonts-recommended",
+      "uchardet", "unrar-free", "xpdf",
+    ]
