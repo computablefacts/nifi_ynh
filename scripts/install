@@ -81,6 +81,9 @@ mkdir -p "/home/$admin/nifi"
 mkdir -p "/home/$admin/nifi/flow/archive"
 ln -s "/home/$admin/nifi/flow" "$data_dir/flow"
 chown "$app:$app" "/home/$admin/nifi/flow"
+ynh_add_config --template="flow.xml.gz" --destination="$data_dir/flow/flow.xml.gz"
+ynh_add_config --template="flow.json.gz" --destination="$data_dir/flow/flow.json.gz"
+
 # Create an empty .env file and link it to data_dir
 touch "/home/$admin/nifi/.env"
 ln -s "/home/$admin/nifi/.env" "$data_dir/.env"
