@@ -101,7 +101,7 @@ ram.runtime = "50M"
     # This will automatically install/uninstall the following apt packages
     # and implicitly define the $phpversion setting as 8.0 (if phpX.Y-foobar dependencies are listed)
     packages = [
-      "a2ps", "bsdmainutils", "clickhouse-client", "curl", "g++", "ghostscript",
+      "a2ps", "bsdmainutils", "curl", "g++", "ghostscript",
       "liblz4-tool", "make", "nano", "pst-utils", "procmail",
       "python3-bs4", "python3-dateutil", "python3-pip",
       "rsync", "ssh", "sshpass",
