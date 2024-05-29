@@ -7,7 +7,7 @@ name = "NiFi"
 description.en = "An easy to use, powerful, and reliable system to process and distribute data"
 description.fr = "Un système facile à utiliser, puissant et fiable pour traiter et distribuer les données"
 
-version = "1.25.0~ynh2"
+version = "1.25.0~ynh3"
 
 maintainers = ["pbrisacier@mncc.fr"]
 
@@ -102,6 +102,7 @@ ram.runtime = "50M"
     # and implicitly define the $phpversion setting as 8.0 (if phpX.Y-foobar dependencies are listed)
     packages = [
       "a2ps", "bsdmainutils", "curl", "g++", "ghostscript",
+      "html2ps",
       "liblz4-tool", "make", "nano", "pst-utils", "procmail",
       "python3-bs4", "python3-dateutil", "python3-pip",
       "rsync", "ssh", "sshpass",
