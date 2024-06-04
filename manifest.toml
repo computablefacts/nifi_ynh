@@ -7,7 +7,7 @@ name = "NiFi"
 description.en = "An easy to use, powerful, and reliable system to process and distribute data"
 description.fr = "Un système facile à utiliser, puissant et fiable pour traiter et distribuer les données"
 
-version = "1.25.0~ynh4"
+version = "1.25.0~ynh5"
 
 maintainers = ["pbrisacier@mncc.fr"]
 
@@ -104,6 +104,7 @@ ram.runtime = "50M"
       "a2ps", "bsdmainutils", "curl", "g++", "ghostscript",
       "html2ps", "csvkit",
       "liblz4-tool", "make", "nano", "pst-utils", "procmail",
+      "poppler-utils",
       "python3-bs4", "python3-dateutil", "python3-pip",
       "rsync", "ssh", "sshpass",
       "tesseract-ocr", 
